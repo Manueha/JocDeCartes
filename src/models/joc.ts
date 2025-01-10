@@ -1,8 +1,12 @@
+import {ServeiNomsService} from "../app/servei-noms.service";
+
 export class Joc {
-  public players: string[] = ['Alumne 1', 'Alumne 2', 'Alumne 3'];
+  public players: string[] = ["Manel","Guillem","Luis"];
   public stack: string[] = [];
   public playedCards: string[] = [];
   public currentPlayer: number = 0;
+  // nomsUsuaris: string[] = ["Home","Dona","Mono","pinguino","DonaSeria","Winkboy"]
+  // numeroNom: number;
 
   constructor() {
     for(let i = 1; i < 13; i++) {
@@ -13,7 +17,15 @@ export class Joc {
 
       shuffle(this.stack);
     }
+
+    //Me daba error al añadir el servicio
+    // this.numeroNom = numero.getNumero() N
+    // this.players.push(this.nomsUsuaris[this.numeroNom])
+
+
+
   }
+
 }
 
 function shuffle(array: string[]) {

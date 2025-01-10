@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Joc} from "../../models/joc";
 import {JugadorComponent} from "../jugador/jugador.component";
 import {NgForOf, NgIf, NgStyle} from "@angular/common";
+import {ServeiTornService} from "../servei-torn.service";
+import {style} from "@angular/animations";
+import {ServeiNomsService} from "../servei-noms.service";
 
 @Component({
   selector: 'app-joc',
@@ -9,7 +12,6 @@ import {NgForOf, NgIf, NgStyle} from "@angular/common";
   imports: [
     JugadorComponent,
     NgStyle,
-    NgForOf,
     NgIf
   ],
   templateUrl: './joc.component.html',
@@ -19,11 +21,27 @@ export class JocComponent implements OnInit {
   pickCardAnimation = false;
   currentCard: string | undefined | any = '';
   game: Joc | undefined;
+  cartaActual: string = '';
+  punts: number = 0;
 
-  constructor() {}
+
+  constructor() {
+
+
+  }
 
   ngOnInit(): void {
     this.newGame();
+
+
+
+    var torn = document.getElementById("start-label-box")!
+    torn.onclick = function (){
+      // @ts-ignore
+      torn.style.backgroundColor = "red"
+    }
+
+
   }
 
   newGame() {
@@ -39,9 +57,21 @@ export class JocComponent implements OnInit {
       setTimeout(()=> {
         this.game?.playedCards.push(this.currentCard);
         this.pickCardAnimation = false;
+        this.cartaActual = this.currentCard
+        for (let i = 1; i < 13; i++){
+          if (this.cartaActual === "hearts_"+i || "clubs_"+i || "spades_"+i || "diamonds_"+i){
+            this.punts = this.punts + i
+
+          }
+        }
       }, 1000);
     }
+
   }
+
+
+
+
 
 
 }
